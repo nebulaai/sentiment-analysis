@@ -1,0 +1,145 @@
+html,
+body {
+    height: 100%;
+    margin: 0 auto;
+    padding: 0;
+}
+
+body {
+    /* background: #DADADA; */
+    background-image: url("../assets/images/sentiment-background.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #2F3238;
+    font-size: 16px;
+    font-family: 'Titillium Web', sans-serif;
+    /*line-height: 28px;*/
+}
+
+div.footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+}
+
+div.footer img {
+    height:58px;
+}
+
+a {
+	color: #7F8289;
+	font-size: 16px;
+    /*display: block;	*/
+    text-decoration: none;
+}
+
+a:hover {
+    color: #7F8289;
+    text-decoration: none;
+}
+
+a.selected {
+	color: #DE5E60;
+}
+a.button {
+    font-size: 16px;
+    padding: 5px;
+    background: #fff;
+    border: 3px solid #2F3238;
+    color: #2F3238;
+}
+
+.header {
+    position: fixed;
+    height: 100px;
+    width: 100%;
+    padding: 10px;
+}
+
+.logo {
+    position: absolute;
+    left: 20px;
+    height: 100px;
+    width:100px;
+}
+
+.logo img{
+    height: 100px;
+}
+
+.header .action{
+    position: absolute;
+    right: 20px;
+    height: 50px;
+    width:150px;
+}
+
+.content {
+    /* display: flex;
+    flex-direction: row; */
+
+}
+
+.content .editor {
+    padding: 20px;
+    margin-top: 150px;
+    margin-left: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content .result {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.report-content {
+    margin: 20px 0;
+    padding: 5px; 
+    height: 68%;
+    overflow: scroll;
+    width: 750px; 
+    border: 1px solid #2c2c2c;
+    box-shadow: 2px 3px #888888;
+    background-color: #EAEAEA
+}
+
+
+.taskdetail-content  {
+    margin: 20px 0;
+    padding: 5px;
+    margin-top: 150px;
+    margin-left: 100px;
+    /*height: 68%;
+    width: 750px; 
+    border: 1px solid #4a2f8e;
+    box-shadow: 2px 3px #888888;*/
+}
+
+.report-content::-webkit-scrollbar { 
+    display: none; 
+}
+
+.input-group-lg {
+    margin-bottom: 10px;
+}
+
+.data-form {
+    width: 80%;
+}
+
+#chart {
+    position: absolute;
+    top:10%;
+    left:10%;
+    width: 80%;
+    height: 80%;
+}
