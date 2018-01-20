@@ -3,7 +3,7 @@ initiateContract(function () {
     prepareTaskContract();
 });                                                                     ///console.log(nebulaAi);
 
-const scriptAddressDefault = "http://ec2-18-218-114-50.us-east-2.compute.amazonaws.com:8080/script/Nebula_LSTM.py";
+const scriptAddressDefault = "http://ec2-18-218-114-50.us-east-2.compute.amazonaws.com:8080/data/rt-polarity.zip";
 const outputAddress = "http://ec2-18-218-114-50.us-east-2.compute.amazonaws.com:8080/nebula-quantum/create/";
 
 const minimalFee = 5;
