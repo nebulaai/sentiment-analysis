@@ -1,7 +1,6 @@
 #!flask/bin/python
 import json
 import zipfile
-import jinja2
 from urllib.request import urlopen
 from zipfile import ZipFile
 import shutil
@@ -37,26 +36,14 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-def render(abs_path):
-    path, filename = os.path.split(abs_path)
-    return jinja2.Environment(
-        loader=jinja2.FileSystemLoader(path or './')
-    ).get_template(filename).render()
+def pos_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in set(['pos'])
 
 
 @app.route('/')
 def index():
-    return render(index_path)
-
-
-@app.route('/upload_error')
-def upload_error():
-    return render_template('index_zip_error.html')
-
-
-@app.route('/upload_successful')
-def upload_success():
-    return render_template('index_upload_successful.html')
+    return app.send_static_file('index.html')
 
 
 # user upload a zip file
@@ -105,20 +92,9 @@ def upload_remote_file():
     return redirect('/')
 
 
-@app.route('/upload/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
-
-
 @app.route('/download/<filename>')
 def download_file(filename):
     return send_from_directory(app.config['DOWNLOAD_FOLDER'], filename)
-
-
-@app.route('/<string:words>', methods=['GET'])
-def train(words):
-
-    return jsonify(words)
 
 
 @app.errorhandler(404)
@@ -146,11 +122,6 @@ def get_miner_model():
             file.save(os.path.join(uuid_upload_dir, filename))
             return jsonify("server has received model from the miner")
     return jsonify("Failed to upload model")
-
-
-def pos_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in set(['pos'])
 
 
 @app.route("/evaluation", methods=['GET', 'POST'])
@@ -200,6 +171,17 @@ def evaluate_test():
         # shutil.rmtree(uuid_path)
         # return redirect(url_for('index'))
     return jsonify("Prediction failed")
+
+
+@app.route('/history')
+def render_history():
+    return render_template('history.html')
+
+
+@app.route('/output')
+def render_output():
+    return render_template('/output')
+
 
 
 if __name__ == '__main__':
