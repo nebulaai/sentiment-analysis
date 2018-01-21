@@ -1,9 +1,9 @@
 #!flask/bin/python
 import json
 import zipfile
+import jinja2
 from urllib.request import urlopen
 from zipfile import ZipFile
-
 import shutil
 from flask import Flask, jsonify, render_template, flash, make_response, session, send_from_directory
 import os
@@ -24,7 +24,7 @@ app.secret_key = "super secret key"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['DOWNLOAD_FOLDER'] = DOWNLOAD_FOLDER
 
-test_url = 'https://fthmb.tqn.com/kAfDW3qs5524lv5XnioNb44csNo=/768x0/filters:no_upscale()/google_docs_logo_and_icon-56a4010a5f9b58b7d0d4e6b2.jpg'
+index_path = '/home/nebula/Desktop/sentiment-analysis/index.html'
 
 
 def url_get_filename(url_address):
@@ -37,9 +37,16 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
+def render(abs_path):
+    path, filename = os.path.split(abs_path)
+    return jinja2.Environment(
+        loader=jinja2.FileSystemLoader(path or './')
+    ).get_template(filename).render()
+
+
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render(index_path)
 
 
 @app.route('/upload_error')
