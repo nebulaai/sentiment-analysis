@@ -122,7 +122,6 @@ def not_found(error):
 @app.route('/tested_model',  methods=['GET'])
 def tested_model():
     # import train
-    # import eval
     # filename = 'prediction.csv'
     # return redirect(url_for('download_file', filename=filename))
     return send_from_directory('', 'packages.txt')
