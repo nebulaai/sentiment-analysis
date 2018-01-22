@@ -6,12 +6,12 @@ window.onload = function () {
     // }
 };
 
-const contractAddress = "0x44b3ab87604ea9e778d81e4af55977c4a7e21a4d"; //Helix v0.2
+const contractAddress = "0x45677a1af702817b00858d6a202136ac3cdc4dca"; //Helix v0.2
 
 
 const loadContract = function(callback) {
     $.ajax({
-        url: "http://ec2-18-218-114-50.us-east-2.compute.amazonaws.com:8080/quantum/assets/ABI/NebulaAi1.json", //"assets/ABI/NebulaAi1.json",
+        url: "http://quantum.nebula-ai.network/assets/ABI/NebulaAi1.json", //"assets/ABI/NebulaAi1.json",
         dataType: "json",
         error: function (e) {
             console.log("loadContract error: ", e);
@@ -27,7 +27,7 @@ const loadContract = function(callback) {
 };
 const prepareTaskContract = function(){
     $.ajax({
-        url: "http://ec2-18-218-114-50.us-east-2.compute.amazonaws.com:8080/quantum/assets/ABI/Task_1.json", //"assets/ABI/Task_1.json",
+        url: "http://quantum.nebula-ai.network/assets/ABI/Task_1.json", //"assets/ABI/Task_1.json",
         dataType: "json",
         error: function (e) {
             console.log("prepareTaskContract error: ", e);
@@ -59,7 +59,7 @@ const initiateContract = function (callback) {
         } else {
             console.log('No web3? You should consider trying MetaMask!')
             // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-            web3 = new Web3(new Web3.providers.HttpProvider("http://ec2-18-221-29-136.us-east-2.compute.amazonaws.com:8545"));
+            web3 = new Web3(new Web3.providers.HttpProvider("http://18.221.71.211:8545"));
         }
 
         // // Now you can start your app & access web3 freely:

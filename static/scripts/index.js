@@ -3,9 +3,10 @@ initiateContract(function () {
     prepareTaskContract();
 });                                                                     ///console.log(nebulaAi);
 
-const scriptAddressDefault = "http://quantum.nebula-ai.network/script/train.py";
+const scriptAddressDefault = "http://quantum.nebula-ai.network/script/train.py"
+const dataAddressDefault = "http://quantum.nebula-ai.network/data/rt-polarity.zip";
 const outputAddress = "ec2-18-220-218-90.us-east-2.compute.amazonaws.com/miner_model";
-
+//const outputAddress ="http://127.0.0.1:5000/miner_model";
 const minimalFee = 5;
 
 /**
@@ -75,12 +76,13 @@ const submitOrder = function (callback) {
     // let dataUri = $("#dataUri").val();
     let taskName = $("#taskName").val();
     let params = { "epoch": $("#epoch").val() };
-    let scriptAddress = $("#dataUri").val();
+    let data_uri = dataAddressDefault;
+    let scriptAddress = $("#scriptUri").val();
 
     currentOrder = new Order(
         uuid,
         taskName,
-        "",
+        data_uri,
         scriptAddress,
         outputAddress,
         params
@@ -91,7 +93,7 @@ const submitOrder = function (callback) {
 
 $(document).ready(function () {
     // changes ex, input placeholder to default value
-    $("#dataUri").focus().attr('value', scriptAddressDefault);
+    $("#scriptUri").focus().attr('value', scriptAddressDefault);
     ////////end changes
     $('.data-form').on('submit', function (e) {
         e.preventDefault();
@@ -229,7 +231,6 @@ const waitingForTaskCompletion = function () {
                     $('#complete_block_hash').html(createLinkToExplorer(result.blockHash, "block"));
                     $('#task_compl_txhash').html(createLinkToExplorer(result.transactionHash, "tx"));
                 }
-
             }
         }
     )
@@ -247,7 +248,7 @@ const payToken = function () {
             nebulaAi.submitTask(
                 currentOrder.uuid,
                 currentOrder.name,
-                "",
+                currentOrder.datasetURI,
                 currentOrder.scriptURI,
                 currentOrder.outputURI,
                 JSON.stringify(currentOrder.parameters),
@@ -356,7 +357,7 @@ function getTransaction(panel, block, hash) {
     });
 }
 function createLinkToExplorer(fill, type) {
-    return "<a href='http://ec2-18-218-114-50.us-east-2.compute.amazonaws.com:8000/#/" + type + "/" + fill + "' target='_blank'>" + fill + "</a>"
+    return "<a href='http://18.218.112.136:8000/#/" + type + "/" + fill + "' target='_blank'>" + fill + "</a>"
 }
 
 function toEther(value) {
