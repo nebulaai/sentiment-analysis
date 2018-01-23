@@ -12,8 +12,8 @@ from werkzeug.utils import secure_filename
 from pathlib import Path
 
 
-UPLOAD_FOLDER = 'uploads/'
-DOWNLOAD_FOLDER = 'downloads/'
+UPLOAD_FOLDER = 'app/uploads/'
+DOWNLOAD_FOLDER = 'app/downloads/'
 ALLOWED_EXTENSIONS = set(['zip'])
 
 
@@ -116,7 +116,7 @@ def get_miner_model():
         file = request.files['files']
         uuid_upload_dir = os.path.join(app.config['UPLOAD_FOLDER'], request.form['uuid'])
         if not os.path.exists(uuid_upload_dir):
-            os.mkdir(uuid_upload_dir)
+            os.makedirs(uuid_upload_dir)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(uuid_upload_dir, filename))
@@ -134,7 +134,7 @@ def evaluate_test():
 
         uuid = input_json["uuid"]
         test_string = input_json["test_string"]
-        data_file_zip = os.path.join("uploads", uuid, "Model.zip")
+        data_file_zip = os.path.join("app/uploads", uuid, "Model.zip")
         # unzip data to get pos and neg path
         zip_ref = zipfile.ZipFile(data_file_zip, 'r')
         extracted = zip_ref.namelist()
