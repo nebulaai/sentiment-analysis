@@ -110,7 +110,7 @@ def tested_model():
     return send_from_directory('', 'packages.txt')
 
 
-@app.route("/miner_model/<string: uuid>", methods=['GET', 'POST'])
+@app.route("/miner_model/<string:uuid>", methods=['GET', 'POST'])
 def get_miner_model(uuid):
     if request.method == 'POST':
         file = request.files['files']
@@ -186,5 +186,5 @@ def render_output():
 
 if __name__ == '__main__':
     app.debug = True
-    # app.run(host='0.0.0.0', port=80)
-    app.run()
+    app.run(host='0.0.0.0', port=80)
+#     app.run()
