@@ -5,7 +5,7 @@ initiateContract(function () {
 
 const scriptAddressDefault = "http://quantum.nebula-ai.network/script/train.py"
 const dataAddressDefault = "http://quantum.nebula-ai.network/data/rt-polarity.zip";
-const outputAddress = "ec2-18-220-218-90.us-east-2.compute.amazonaws.com/miner_model";
+const outputAddress = "http://ec2-18-220-218-90.us-east-2.compute.amazonaws.com/miner_model";
 //const outputAddress ="http://127.0.0.1:5000/miner_model";
 const minimalFee = 5;
 
