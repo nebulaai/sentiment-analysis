@@ -110,8 +110,8 @@ def tested_model():
     return send_from_directory('', 'packages.txt')
 
 
-@app.route("/miner_model", methods=['GET', 'POST'])
-def get_miner_model():
+@app.route("/miner_model/<string: uuid>", methods=['GET', 'POST'])
+def get_miner_model(uuid):
     if request.method == 'POST':
         file = request.files['files']
         uuid_upload_dir = os.path.join(app.config['UPLOAD_FOLDER'], request.form['uuid'])
