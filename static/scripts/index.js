@@ -40,7 +40,7 @@ const blocks = {
 };
 
 const useDefault = function () {
-    $("#dataUri").val(scriptAddressDefault);
+    $("#scriptUri").val(scriptAddressDefault);
 };
 
 const toggleUploadPanel = function () {
@@ -93,7 +93,7 @@ const submitOrder = function (callback) {
 
 $(document).ready(function () {
     // changes ex, input placeholder to default value
-    $("#scriptUri").focus().attr('value', scriptAddressDefault);
+    // $("#scriptUri").focus().attr('value', scriptAddressDefault);
     ////////end changes
     $('.data-form').on('submit', function (e) {
         e.preventDefault();

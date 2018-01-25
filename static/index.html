@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="en">
-    
+
 <head>
     <title>Nebula AI Sentiment</title>
     <meta charset="utf-8">
@@ -9,14 +9,21 @@
     <meta name="keywords" content="AI, Blockchain">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"
-    />
-    <link href="static/styles/main.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          type="text/css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="static/styles/main.css" rel="stylesheet" type="text/css"/>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="static/scripts/web3js_min.js"></script>
     <script src="static/scripts/contract.js"></script>
     <script src="static/scripts/index.js"></script>
@@ -24,174 +31,189 @@
 </head>
 
 <body>
-    <div class="header">
-        <div class="logo">
-            <img src="static/assets/images/Nebula_Logo2.png" alt="Nebula Logo" />
-        </div>
-        <div class="action">
-            <button type="button" class="btn btn-default" onclick="window.open('history', '_self')">
-                <span>View All Tasks</span>
-            </button>
-            <!-- <button type="button" class="btn btn-primary" onclick="window.open('./templates/transaction.html', '_self')">
-                <span>View Wallet</span>
-            </button> -->
-        </div>
+<div class="header">
+    <div class="logo">
+        <img src="static/assets/images/Nebula_Logo2.png" alt="Nebula Logo"/>
     </div>
-
-    <div class="container-fluid content">
-        <div class="editor col-xs-12 col-md-5">
-            <h2>Quant AI task</h2>
-            <form class="data-form" id="taskForm" action="#">
-                <label for="taskName">Task Name</label>
-                <div class="input-group-lg">
-                    <input type="text" class="form-control" id="taskName" placeholder="task name" aria-describedby="basic-addon3">
-                </div>
-                <label for="scriptUri">Training Script URI</label>
-                <div class="input-group-lg">
-                    <input id="scriptUri" name="scriptUri" class="form-control" type="text" value="http://quantum.nebula-ai.network/data/rt-polarity.zip"
-                        placeholder="python training script uri or upload to our server"/>
-                </div>
-                <div class="input-group-btn" style="width:100%; margin-top: 5px; text-align: center;" id="btn-group-1">
-                    <!-- <button onclick="toggleUploadPanel()" class="btn btn-default" type="button">Upload</button> -->
-                    <button onclick="useDefault()" class="btn btn-primary" style="background-color: #2c2c2c;" type="button" style="align-content: right">Experiment with Pre-trained model</button>
-                </div>
-                <div id="uploadPanel" style="display: none">
-                    <input type="file" id="myFile" multiple size="1" onchange="uploadFile()">
-                    <button class="btn btn-default" type=button onclick="uploadFile()">Upload</button>
-                    <button class="btn btn-warning" type="button" onclick="toggleUploadPanel()">Back</button>
-                    <!--<form action="http://ec2-18-218-114-50.us-east-2.compute.amazonaws.com:8080/" method=post enctype=multipart/form-data>-->
-                </div>
-                <!--<form enctype="multipart/form-data" action="/files" method="post">-->
+    <div class="action">
+        <button type="button" class="btn btn-default" onclick="window.open('history', '_self')">
+            <span>View All Tasks</span>
+        </button>
+        <!-- <button type="button" class="btn btn-primary" onclick="window.open('./templates/transaction.html', '_self')">
+            <span>View Wallet</span>
+        </button> -->
+    </div>
+</div>
+<div class="body-container">
+    <div class="content-container">
+        <div class="container-fluid content">
+            <div class="editor col-xs-12 col-md-6">
+                <h2>Sentiment Analysis</h2>
+                <form class="data-form" id="taskForm" action="#">
+                    <label for="taskName">Task Name</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="taskName" placeholder="task name"
+                               aria-describedby="basic-addon3">
+                    </div>
+                    <label for="scriptUri">Training Script URI</label>
+                    <div class="input-group">
+                        <input id="scriptUri" name="scriptUri" class="form-control" type="text"
+                               placeholder="python training script uri or upload to our server"/>
+                        <span class="input-group-btn">
+                    <button onclick="useDefault()" class="btn btn-primary" style="background-color: #2c2c2c;"
+                            type="button"
+                            style="align-content: right">Experiment with Pre-trained model
+                </button>
+                </span>
+                    </div>
+                    <div id="uploadPanel" style="display: none">
+                        <input type="file" id="myFile" multiple size="1" onchange="uploadFile()">
+                        <button class="btn btn-default" type=button onclick="uploadFile()">Upload</button>
+                        <button class="btn btn-warning" type="button" onclick="toggleUploadPanel()">Back</button>
+                        <!--<form action="http://ec2-18-218-114-50.us-east-2.compute.amazonaws.com:8080/" method=post enctype=multipart/form-data>-->
+                    </div>
+                    <!--<form enctype="multipart/form-data" action="/files" method="post">-->
                     <!--<input id="image-file" type="file" />-->
-                <!--</form>-->
-                <label for="epoch">Epoch</label>
-                <div class="input-group-lg">
-                    <input id="epoch" name="epochAmount" class="form-control" type="text" value="5">
-                </div>
-                <div class="row" style="text-align: center; margin-top: 20px;">
-                    <button type="submit" class="btn btn-primary" style="background-color: #2c2c2c;" id="create_task_btn">Create a new task</button>
-                    <button type="button" class="btn btn-default" style="display: none" id="mod_task_btn">Modify</button>
-                </div>
-            </form>
-            <div style="margin-top:10px; display: none" class="panel panel-info" id="payment">
-                <div class="panel-heading">Task confirmation</div>
-                <div style="padding: 20px;">
-                    <p style="font-size: 12px; color: #999;">
-                        Task has created successfully. Please pay the token to see the analysis
-                    </p>
-                    <label for="tx_fee_value">Suggestion Amount:</label>
-                    <div class="input-group-lg">
-                        <input id="tx_fee_value" name="epochAmount" class="form-control" type="text" value="5">
+                    <!--</form>-->
+                    <label for="epoch">Epoch</label>
+                    <div class="input-group">
+                        <input id="epoch" name="epochAmount" class="form-control" type="text" value="5">
                     </div>
-                    <div class="row" style="text-align: center">
-                        <button type="button" class="btn btn-primary"  style="background-color: #2c2c2c;" onclick="payToken()">Pay Token</button>
+                    <div style="text-align: center; margin-top: 40px;">
+                        <button type="submit" class="btn btn-primary" style="background-color: #2c2c2c;"
+                                id="create_task_btn">
+                            Create a new task
+                        </button>
+                        <button type="button" class="btn btn-default" style="display: none" id="mod_task_btn">Modify
+                        </button>
+                    </div>
+                </form>
+                <div style="margin-top:10px; display: none" class="panel panel-info" id="payment">
+                    <div class="panel-heading">Task confirmation</div>
+                    <div style="padding: 20px;">
+                        <p style="font-size: 12px; color: #999;">
+                            Task has created successfully. Please pay the token to see the analysis
+                        </p>
+                        <label for="tx_fee_value">Suggestion Amount:</label>
+                        <div class="input-group-lg">
+                            <input id="tx_fee_value" name="epochAmount" class="form-control" type="text" value="5">
+                        </div>
+                        <div class="row" style="text-align: center">
+                            <button type="button" class="btn btn-primary" style="background-color: #2c2c2c;"
+                                    onclick="payToken()">Pay Token
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="result col-xs-12 col-md-6">
+                <div id="status">
+                    <h2>Reports</h2>
+                    <p>This calculation will last about 10 minutes, please don't close this window, thw result will show
+                        below.</p>
+                    <div class="report-content">
+                        <div id="transactionHash">
+
+                        </div>
+                        <div id="taskReceived">
+                            <h3>Task Contract Information</h3>
+                            <table>
+                                <tr>
+                                    <td>Address :</td>
+                                    <td id="task_add_cell"></td>
+                                </tr>
+                                <tr>
+                                    <td>Task Id :</td>
+                                    <td id="task_id_cell"></td>
+                                </tr>
+                                <tr>
+                                    <td>UUID :</td>
+                                    <td id="uuid_cell"></td>
+                                </tr>
+                                <tr>
+                                    <td>Worker :</td>
+                                    <td id="task_worker_cell"></td>
+                                </tr>
+                                <tr>
+                                    <td>Issue :</td>
+                                    <td id="task_ok_cell"></td>
+                                </tr>
+                                <tr>
+                                    <td>Issue Reported txHash :</td>
+                                    <td id="task_issue_txhash"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="taskDispatched">
+                            <h3>Task Dispatched</h3>
+                            <table>
+                                <tr>
+                                    <td>Block :</td>
+                                    <td id="dispatch_block"></td>
+                                </tr>
+                                <tr>
+                                    <td>Block Hash :</td>
+                                    <td id="dispatch_block_hash"></td>
+                                </tr>
+                                <tr>
+                                    <td>Dispatch txHash :</td>
+                                    <td id="task_disp_txhash"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="taskStarted">
+                            <h3>Task Started</h3>
+                            <table>
+                                <tr>
+                                    <td>Block :</td>
+                                    <td id="start_block"></td>
+                                </tr>
+                                <tr>
+                                    <td>Block Hash :</td>
+                                    <td id="start_block_hash"></td>
+                                </tr>
+                                <tr>
+                                    <td>Starting txHash :</td>
+                                    <td id="task_start_txhash"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="taskCompleted">
+                            <h3>Task Completed</h3>
+                            <table>
+                                <tr>
+                                    <td>Block :</td>
+                                    <td id="complete_block"></td>
+                                </tr>
+                                <tr>
+                                    <td>Block Hash :</td>
+                                    <td id="complete_block_hash"></td>
+                                </tr>
+                                <tr>
+                                    <td>Completion txHash</td>
+                                    <td id="task_compl_txhash"></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </div>
+                    <div class="row" style="text-align: center; margin-top:10px;">
+                        <i id="report-loading" class="fa fa-spinner fa-spin" style="font-size:24px; display:none;"></i>
+                        <button id="view-report-btn" style="background-color: #2c2c2c; display:none;"
+                                class="btn btn-primary">
+                            View reports
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="result col-xs-12 col-md-6">
-            <div id="status">
-                <h2>Reports</h2>
-                <p>This calculation will last about 10 minutes, please don't close this window, thw result will show below.</p>
-                <div class="report-content">
-                <div id="transactionHash">
-
-                </div>
-                <div id="taskReceived">
-                    <h3>Task Contract Information</h3>
-                    <table>
-                        <tr>
-                            <td>Address : </td>
-                            <td id="task_add_cell"></td>
-                        </tr>
-                        <tr>
-                            <td>Task Id : </td>
-                            <td id="task_id_cell"></td>
-                        </tr>
-                        <tr>
-                            <td>UUID : </td>
-                            <td id="uuid_cell"></td>
-                        </tr>
-                        <tr>
-                            <td>Worker : </td>
-                            <td id="task_worker_cell"></td>
-                        </tr>
-                        <tr>
-                            <td>Issue : </td>
-                            <td id="task_ok_cell"></td>
-                        </tr>
-                        <tr>
-                            <td>Issue Reported txHash : </td>
-                            <td id="task_issue_txhash"></td>
-                        </tr>
-                    </table>
-                </div>
-                <div id="taskDispatched">
-                    <h3>Task Dispatched</h3>
-                    <table>
-                        <tr>
-                            <td>Block : </td>
-                            <td id="dispatch_block"></td>
-                        </tr>
-                        <tr>
-                            <td>Block Hash : </td>
-                            <td id="dispatch_block_hash"></td>
-                        </tr>
-                        <tr>
-                            <td>Dispatch txHash :</td>
-                            <td id="task_disp_txhash"></td>
-                        </tr>
-                    </table>
-                </div>
-                <div id="taskStarted">
-                    <h3>Task Started</h3>
-                    <table>
-                        <tr>
-                            <td>Block : </td>
-                            <td id="start_block"></td>
-                        </tr>
-                        <tr>
-                            <td>Block Hash : </td>
-                            <td id="start_block_hash"></td>
-                        </tr>
-                        <tr>
-                            <td>Starting txHash : </td>
-                            <td id="task_start_txhash"></td>
-                        </tr>
-                    </table>
-                </div>
-                <div id="taskCompleted">
-                    <h3>Task Completed</h3>
-                    <table>
-                        <tr>
-                            <td>Block : </td>
-                            <td id="complete_block"></td>
-                        </tr>
-                        <tr>
-                            <td>Block Hash : </td>
-                            <td id="complete_block_hash"></td>
-                        </tr>
-                        <tr>
-                            <td>Completion txHash</td>
-                            <td id="task_compl_txhash"></td>
-                        </tr>
-                    </table>
-                </div>
-               
-            </div>
-            <div class="row" style="text-align: center; margin-top:10px;">
-                <i id="report-loading" class="fa fa-spinner fa-spin" style="font-size:24px; display:none;"></i>
-                <button id="view-report-btn" style="background-color: #2c2c2c; display:none;" class="btn btn-primary">View reports</button>
-            </div>
+        <div class="footer">
+            <img src="static/assets/images/sentiment-logo.svg" alt="">
+            Copyright reserved by NEBULA AI &copy;2017 - 2022
         </div>
-    </div>
-    
-    <div class="footer">
-        <img src="static/assets/images/sentiment-logo.svg" alt="">
-        Copyright reserved by NEBULA AI &copy;2017 - 2022
-    </div>
 
+    </div>
+</div>
 
 </body>
 
