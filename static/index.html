@@ -45,7 +45,6 @@
     </div>
 </div>
 <div class="body-container">
-    <div class="content-container">
         <div class="container-fluid content">
             <div class="editor col-xs-12 col-md-6">
                 <h2>Sentiment Analysis</h2>
@@ -113,7 +112,33 @@
                         below.</p>
                     <div class="report-content">
                         <div id="transactionHash">
-
+                            <h3>Transaction Details</h3>
+                        <table>
+                            <tr>
+                                <td>Tx Hash : </td><td id="sub_txhash"></td>
+                            </tr>
+                            <tr>
+                                <td>Block Number : </td><td id="sub_block_number"></td>
+                            </tr>
+                            <tr>
+                                <td>Block Hash : </td><td id="sub_block_hash"></td>
+                            </tr>
+                            <tr>
+                                <td>From Wallet : </td><td id="sub_from"></td>
+                            </tr>
+                            <tr>
+                                <td>To Nebula Contract : </td><td id="sub_to"></td>
+                            </tr>
+                            <tr>
+                                <td>Gas Spent : </td><td id="sub_gas_spent"></td>
+                            </tr>
+                            <tr>
+                                <td>Gas Price : </td><td id="sub_gas_price"></td>
+                            </tr>
+                            <tr>
+                                <td>Fee : </td><td id="sub_fee"></td>
+                            </tr>
+                        </table>
                         </div>
                         <div id="taskReceived">
                             <h3>Task Contract Information</h3>
@@ -207,12 +232,10 @@
                 </div>
             </div>
         </div>
-        <div class="footer">
+    <div class="footer">
             <img src="static/assets/images/sentiment-logo.svg" alt="">
             Copyright reserved by NEBULA AI &copy;2017 - 2022
         </div>
-
-    </div>
 </div>
 
 </body>

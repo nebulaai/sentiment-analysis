@@ -109,48 +109,62 @@ const waitingForSubmitConfirmation = function (result) {
 
     currentOrder.setTransactionHash(result);
 
-    let txHash = result;
-    getTransaction("#transactionHash", blocks.submit, txHash);
+    web3.eth.getTransaction(result, function (error, result) {
+        if (error) {
+            console.log(error);
+        } else {
+            blocks.submit = result;
+            $("#sub_txhash").html(createLinkToExplorer(result.hash, "tx"));
+            $("#sub_block_number").html("Not yet mined");
+            $("#sub_block_hash").html("0x0");
+            $("#sub_from").html(createLinkToExplorer(result.from, "address"));
+            $("#sub_to").html(createLinkToExplorer(result.to, "address"));
+            $("#sub_gas_spent").html(result.gas);
+            $("#sub_gas_price").html((new BigNumber(toEther(result.gasPrice))).toString());
+            $("#sub_fee").html((new BigNumber(toEther(result.value))).toString());
+        }
+    });
+
 
     console.log("Transaction Hash: ", result);
     console.log("waiting for submit confirmation");
 
-    let submitEvent = nebulaAi.TaskSubmitted();
+    checkForSubmission(result);
 
-
-    submitEvent.watch(function (error, result) {
-        if (result.args._sender_address.toLowerCase() === web3.eth.defaultAccount.toLowerCase()) {
-            submitEvent.stopWatching();
-            if (error) {
-                console.log("error: ", error);
-            } else {
-                getTransaction("#transactionHash", blocks.submit, txHash);
-                currentOrder.setTaskContractAddress(result.args._task_address);
-                loadTaskContract(result.args._task_address);
-
-                $("#taskReceived").show();
-                $("#task_add_cell").empty().html(createLinkToExplorer(result.args._task_address, "address"));
-
-                getTaskID();
-                getUuid();
-                myTaskWorker();
-                taskContractInstance.task_issue(function (error, result) {
-                    if (error) {
-                        console.log(error);
-                        $('#task_ok_cell').empty().html('error');
-                        $('#task_issue_txhash').empty().html(error ? "ERROR_HASH" : "N/A");
-                    } else {
-                        $('#task_ok_cell').empty().html('ok');
-                        blocks.task.has_issue = result;
-                    }
-                });
-
-                console.log("Task submitted @ address : ", currentOrder.taskContractAddress);
-
-                // waitingForTaskDispatch();
-            }
-        }
-    });
+    // let submitEvent = nebulaAi.TaskSubmitted();
+    // submitEvent.watch(function (error, result) {
+    //     if (result.args._sender_address.toLowerCase() === web3.eth.defaultAccount.toLowerCase()) {
+    //         submitEvent.stopWatching();
+    //         if (error) {
+    //             console.log("error: ", error);
+    //         } else {
+    //             getTransaction("#transactionHash", blocks.submit, txHash);
+    //             currentOrder.setTaskContractAddress(result.args._task_address);
+    //             loadTaskContract(result.args._task_address);
+    //
+    //             $("#taskReceived").show();
+    //             $("#task_add_cell").empty().html(createLinkToExplorer(result.args._task_address, "address"));
+    //
+    //             getTaskID();
+    //             getUuid();
+    //             myTaskWorker();
+    //             taskContractInstance.task_issue(function (error, result) {
+    //                 if (error) {
+    //                     console.log(error);
+    //                     $('#task_ok_cell').empty().html('error');
+    //                     $('#task_issue_txhash').empty().html(error ? "ERROR_HASH" : "N/A");
+    //                 } else {
+    //                     $('#task_ok_cell').empty().html('ok');
+    //                     blocks.task.has_issue = result;
+    //                 }
+    //             });
+    //
+    //             console.log("Task submitted @ address : ", currentOrder.taskContractAddress);
+    //
+    //             // waitingForTaskDispatch();
+    //         }
+    //     }
+    // });
 };
 const waitingForTaskDispatch = function () {
 
@@ -364,3 +378,59 @@ function toEther(value) {
     return web3.fromWei(value, 'ether');
 }
 
+let checkForSubmission = function(hash){
+    web3.eth.getTransaction(hash, function (error, result) {
+        if(error){
+            console.log(error);
+        }else{
+            if(result.blockNumber === null){
+                setTimeout(function () {
+                    checkForSubmission(hash);
+                }, 2500);
+            }else{
+                console.log("Transaction has been mined");
+                $("#sub_block_number").html(createLinkToExplorer(result.blockNumber, "block"));
+                $("#sub_block_hash").html(createLinkToExplorer(result.blockHash, "block"));
+
+                //Task mined, go get task address
+                getCurrentTask();
+            }
+        }
+    });
+}
+
+function getCurrentTask(){
+    nebulaAi.getMyActiveTasks(function (error, result) {
+        if(error){
+            console.log(error);
+        }else{
+            if(result.length==0){
+                setTimeout(function(){
+                    getCurrentTask();
+                },2500);
+            }else{
+                console.log("Current Task address" + result[0]);
+                currentOrder.taskContractAddress = result[0];
+
+                //Load Task at address
+                loadTaskContract(currentOrder.taskContractAddress);
+
+                loadTaskContractDetails();
+
+                //Task address found
+                //check for dispatch
+                //TODO constant checking will cause too much read if there is a long queue
+                //TODO to change in next update
+                waitingForTaskDispatch();
+            }
+        }
+    });
+}
+
+function loadTaskContractDetails(){
+    $("#task_add_cell").html(currentOrder.taskContractAddress);
+    $("#task_id_cell").html(getTaskID());
+    $("#uuid_cell").html(getUuid());
+    $("#task_worker_cell").html(myTaskWorker());
+    $("#task_ok_cell").html(isTaskOk() ? "OK" : "Issue found");
+}
