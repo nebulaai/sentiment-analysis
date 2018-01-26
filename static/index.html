@@ -27,6 +27,7 @@
     <script src="static/scripts/web3js_min.js"></script>
     <script src="static/scripts/contract.js"></script>
     <script src="static/scripts/index.js"></script>
+    <script src="static/scripts/bignumber.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.js"></script>
 </head>
 
@@ -39,205 +40,136 @@
         <button type="button" class="btn btn-default" onclick="window.open('history', '_self')">
             <span>View All Tasks</span>
         </button>
-        <!-- <button type="button" class="btn btn-primary" onclick="window.open('./templates/transaction.html', '_self')">
-            <span>View Wallet</span>
-        </button> -->
     </div>
 </div>
 <div class="body-container">
-        <div class="container-fluid content">
-            <div class="editor col-xs-12 col-md-6">
-                <h2>Sentiment Analysis</h2>
-                <form class="data-form" id="taskForm" action="#">
-                    <label for="taskName">Task Name</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="taskName" placeholder="task name"
-                               aria-describedby="basic-addon3">
-                    </div>
-                    <label for="scriptUri">Training Script URI</label>
-                    <div class="input-group">
-                        <input id="scriptUri" name="scriptUri" class="form-control" type="text"
-                               placeholder="python training script uri or upload to our server"/>
-                        <span class="input-group-btn">
+    <div class="container-fluid content">
+        <div class="editor col-xs-12 col-md-6">
+            <h2>Sentiment Analysis</h2>
+            <form class="data-form" id="taskForm" action="#">
+                <label for="taskName">Task Name</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="taskName" placeholder="task name"
+                           aria-describedby="basic-addon3">
+                </div>
+                <label for="scriptUri">Training Script URI</label>
+                <div class="input-group">
+                    <input id="scriptUri" name="scriptUri" class="form-control" type="text"
+                           placeholder="python training script uri or upload to our server"/>
+                    <span class="input-group-btn">
                     <button onclick="useDefault()" class="btn btn-primary" style="background-color: #2c2c2c;"
                             type="button"
                             style="align-content: right">Experiment with Pre-trained model
                 </button>
                 </span>
+                </div>
+                <div id="uploadPanel" style="display: none">
+                    <input type="file" id="myFile" multiple size="1" onchange="uploadFile()">
+                    <button class="btn btn-default" type=button onclick="uploadFile()">Upload</button>
+                    <button class="btn btn-warning" type="button" onclick="toggleUploadPanel()">Back</button>
+                </div>
+                <label for="epoch">Epoch</label>
+                <div class="input-group">
+                    <input id="epoch" name="epochAmount" class="form-control" type="text" value="5">
+                </div>
+                <div style="text-align: center; margin-top: 40px;">
+                    <button type="submit" class="btn btn-primary" style="background-color: #2c2c2c;"
+                            id="create_task_btn">
+                        Create a new task
+                    </button>
+                    <button type="button" class="btn btn-default" style="display: none" id="mod_task_btn">Modify
+                    </button>
+                </div>
+            </form>
+            <div style="margin-top:10px; display: none" class="panel panel-info" id="payment">
+                <div class="panel-heading">Task confirmation</div>
+                <div style="padding: 20px;">
+                    <p style="font-size: 12px; color: #999;">
+                        Task has created successfully. Please pay the token to see the analysis
+                    </p>
+                    <label for="tx_fee_value">Suggestion Amount:</label>
+                    <div class="input-group-lg">
+                        <input id="tx_fee_value" name="epochAmount" class="form-control" type="text" value="5">
                     </div>
-                    <div id="uploadPanel" style="display: none">
-                        <input type="file" id="myFile" multiple size="1" onchange="uploadFile()">
-                        <button class="btn btn-default" type=button onclick="uploadFile()">Upload</button>
-                        <button class="btn btn-warning" type="button" onclick="toggleUploadPanel()">Back</button>
-                        <!--<form action="http://ec2-18-218-114-50.us-east-2.compute.amazonaws.com:8080/" method=post enctype=multipart/form-data>-->
-                    </div>
-                    <!--<form enctype="multipart/form-data" action="/files" method="post">-->
-                    <!--<input id="image-file" type="file" />-->
-                    <!--</form>-->
-                    <label for="epoch">Epoch</label>
-                    <div class="input-group">
-                        <input id="epoch" name="epochAmount" class="form-control" type="text" value="5">
-                    </div>
-                    <div style="text-align: center; margin-top: 40px;">
-                        <button type="submit" class="btn btn-primary" style="background-color: #2c2c2c;"
-                                id="create_task_btn">
-                            Create a new task
+                    <div class="row" style="text-align: center">
+                        <button type="button" class="btn btn-primary" style="background-color: #2c2c2c;"
+                                onclick="payToken()">Pay Token
                         </button>
-                        <button type="button" class="btn btn-default" style="display: none" id="mod_task_btn">Modify
-                        </button>
-                    </div>
-                </form>
-                <div style="margin-top:10px; display: none" class="panel panel-info" id="payment">
-                    <div class="panel-heading">Task confirmation</div>
-                    <div style="padding: 20px;">
-                        <p style="font-size: 12px; color: #999;">
-                            Task has created successfully. Please pay the token to see the analysis
-                        </p>
-                        <label for="tx_fee_value">Suggestion Amount:</label>
-                        <div class="input-group-lg">
-                            <input id="tx_fee_value" name="epochAmount" class="form-control" type="text" value="5">
-                        </div>
-                        <div class="row" style="text-align: center">
-                            <button type="button" class="btn btn-primary" style="background-color: #2c2c2c;"
-                                    onclick="payToken()">Pay Token
-                            </button>
-                        </div>
                     </div>
                 </div>
             </div>
-            <div class="result col-xs-12 col-md-6">
-                <div id="status">
-                    <h2>Reports</h2>
-                    <p>This calculation will last about 10 minutes, please don't close this window, thw result will show
-                        below.</p>
-                    <div class="report-content">
-                        <div id="transactionHash">
-                            <h3>Transaction Details</h3>
+        </div>
+        <div class="result col-xs-12 col-md-6">
+            <div id="status">
+                <h2>Reports</h2>
+                <p>This calculation will last about 10 minutes, please don't close this window, thw result will show
+                    below.</p>
+                <div class="report-content">
+                    <div id="transactionHash">
+                        <h3>Transaction Details</h3>
                         <table>
                             <tr>
-                                <td>Tx Hash : </td><td id="sub_txhash"></td>
+                                <td>Tx Hash :</td>
+                                <td id="sub_txhash"></td>
                             </tr>
                             <tr>
-                                <td>Block Number : </td><td id="sub_block_number"></td>
+                                <td>Block Number :</td>
+                                <td id="sub_block_number"></td>
                             </tr>
                             <tr>
-                                <td>Block Hash : </td><td id="sub_block_hash"></td>
+                                <td>Block Hash :</td>
+                                <td id="sub_block_hash"></td>
                             </tr>
                             <tr>
-                                <td>From Wallet : </td><td id="sub_from"></td>
+                                <td>From Wallet :</td>
+                                <td id="sub_from"></td>
                             </tr>
                             <tr>
-                                <td>To Nebula Contract : </td><td id="sub_to"></td>
+                                <td>To Nebula Contract :</td>
+                                <td id="sub_to"></td>
                             </tr>
                             <tr>
-                                <td>Gas Spent : </td><td id="sub_gas_spent"></td>
+                                <td>Gas Spent :</td>
+                                <td id="sub_gas_spent"></td>
                             </tr>
                             <tr>
-                                <td>Gas Price : </td><td id="sub_gas_price"></td>
+                                <td>Gas Price :</td>
+                                <td id="sub_gas_price"></td>
                             </tr>
                             <tr>
-                                <td>Fee : </td><td id="sub_fee"></td>
+                                <td>Fee :</td>
+                                <td id="sub_fee"></td>
                             </tr>
                         </table>
-                        </div>
-                        <div id="taskReceived">
-                            <h3>Task Contract Information</h3>
-                            <table>
-                                <tr>
-                                    <td>Address :</td>
-                                    <td id="task_add_cell"></td>
-                                </tr>
-                                <tr>
-                                    <td>Task Id :</td>
-                                    <td id="task_id_cell"></td>
-                                </tr>
-                                <tr>
-                                    <td>UUID :</td>
-                                    <td id="uuid_cell"></td>
-                                </tr>
-                                <tr>
-                                    <td>Worker :</td>
-                                    <td id="task_worker_cell"></td>
-                                </tr>
-                                <tr>
-                                    <td>Issue :</td>
-                                    <td id="task_ok_cell"></td>
-                                </tr>
-                                <tr>
-                                    <td>Issue Reported txHash :</td>
-                                    <td id="task_issue_txhash"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="taskDispatched">
-                            <h3>Task Dispatched</h3>
-                            <table>
-                                <tr>
-                                    <td>Block :</td>
-                                    <td id="dispatch_block"></td>
-                                </tr>
-                                <tr>
-                                    <td>Block Hash :</td>
-                                    <td id="dispatch_block_hash"></td>
-                                </tr>
-                                <tr>
-                                    <td>Dispatch txHash :</td>
-                                    <td id="task_disp_txhash"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="taskStarted">
-                            <h3>Task Started</h3>
-                            <table>
-                                <tr>
-                                    <td>Block :</td>
-                                    <td id="start_block"></td>
-                                </tr>
-                                <tr>
-                                    <td>Block Hash :</td>
-                                    <td id="start_block_hash"></td>
-                                </tr>
-                                <tr>
-                                    <td>Starting txHash :</td>
-                                    <td id="task_start_txhash"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="taskCompleted">
-                            <h3>Task Completed</h3>
-                            <table>
-                                <tr>
-                                    <td>Block :</td>
-                                    <td id="complete_block"></td>
-                                </tr>
-                                <tr>
-                                    <td>Block Hash :</td>
-                                    <td id="complete_block_hash"></td>
-                                </tr>
-                                <tr>
-                                    <td>Completion txHash</td>
-                                    <td id="task_compl_txhash"></td>
-                                </tr>
-                            </table>
-                        </div>
+                    </div>
+                    <div id="taskReceived" style="display: none">
+                        <h3>Task Contract Information</h3>
+                    </div>
+                    <div id="taskDispatched" style="display: none">
+                        <h3>Task Dispatched</h3>
+                    </div>
+                    <div id="taskStarted" style="display: none">
+                        <h3>Task Started</h3>
+                    </div>
+                    <div id="taskCompleted" style="display: none">
+                        <h3>Task Completed</h3>
+                    </div>
 
-                    </div>
-                    <div class="row" style="text-align: center; margin-top:10px;">
-                        <i id="report-loading" class="fa fa-spinner fa-spin" style="font-size:24px; display:none;"></i>
-                        <button id="view-report-btn" style="background-color: #2c2c2c; display:none;"
-                                class="btn btn-primary">
-                            View reports
-                        </button>
-                    </div>
+                </div>
+                <div class="row" style="text-align: center; margin-top:10px;">
+                    <i id="report-loading" class="fa fa-spinner fa-spin" style="font-size:24px; display:none;"></i>
+                    <button id="view-report-btn" style="background-color: #2c2c2c; display:none;"
+                            class="btn btn-primary">
+                        View reports
+                    </button>
                 </div>
             </div>
         </div>
+    </div>
     <div class="footer">
-            <img src="static/assets/images/sentiment-logo.svg" alt="">
-            Copyright reserved by NEBULA AI &copy;2017 - 2022
-        </div>
+        <img src="static/assets/images/sentiment-logo.svg" alt="">
+        Copyright reserved by NEBULA AI &copy;2017 - 2022
+    </div>
 </div>
-
 </body>
-
 </html>
