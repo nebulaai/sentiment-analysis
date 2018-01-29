@@ -84,9 +84,9 @@ tf.flags.DEFINE_string("positive_data_file", pos_file_path, "Data source for the
 tf.flags.DEFINE_string("negative_data_file", neg_file_path, "Data source for the negative data.")
 
 # Eval Parameters
-uuid_dir_path = os.path.join('uploads', global_dic['uuid'])
-checkpoint_dir_path = os.path.join(uuid_dir_path, 'checkpoints')
-
+uuid_dir_path = os.path.join('app/uploads', global_dic['uuid'])
+# checkpoint_dir_path = os.path.join(uuid_dir_path, 'checkpoints')
+checkpoint_dir_path = 'evaluation/checkpoints'
 
 tf.flags.DEFINE_integer("batch_size", 64, "Batch Size (default: 64)")
 tf.flags.DEFINE_string("checkpoint_dir", checkpoint_dir_path, "Checkpoint directory from training run")
@@ -112,7 +112,7 @@ size_of_raw = len(x_raw)
 y_test = [size_of_raw]
 
 # Map data into vocabulary
-vocab_path = os.path.join(uuid_dir_path, "vocab")
+vocab_path = 'evaluation/vocab'
 vocab_processor = learn.preprocessing.VocabularyProcessor.restore(vocab_path)
 x_test = np.array(list(vocab_processor.transform(x_raw)))
 
