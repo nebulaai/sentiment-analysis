@@ -135,25 +135,25 @@ def evaluate_test():
 
         uuid = input_json["uuid"]
         test_string = input_json["test_string"]
-        # data_file_zip = os.path.join("app/uploads", uuid, "Model.zip")
-        # # unzip data to get pos and neg path
-        # zip_ref = zipfile.ZipFile(data_file_zip, 'r')
-        # extracted = zip_ref.namelist()
-        # uuid_path = os.path.split(data_file_zip)[0]
-        #
-        # zip_ref.extractall(uuid_path)
-        # zip_ref.close()
-        # extracted_file_pos = ""
-        # extracted_file_neg = ""
-        #
-        # for each_filename in extracted:
-        #     if pos_file(each_filename):
-        #         extracted_file_pos = each_filename
-        #     if not pos_file(each_filename):
-        #         extracted_file_neg = each_filename
+        data_file_zip = os.path.join("app/uploads", uuid, "Model.zip")
+        # unzip data to get pos and neg path
+        zip_ref = zipfile.ZipFile(data_file_zip, 'r')
+        extracted = zip_ref.namelist()
+        uuid_path = os.path.split(data_file_zip)[0]
 
-        data_file = {'pos_path': 'data/rt-polaritydata/rt-polarity.pos',
-                     'neg_path': 'data/rt-polaritydata/rt-polarity.neg'}
+        zip_ref.extractall(uuid_path)
+        zip_ref.close()
+        extracted_file_pos = ""
+        extracted_file_neg = ""
+
+        for each_filename in extracted:
+            if pos_file(each_filename):
+                extracted_file_pos = each_filename
+            if not pos_file(each_filename):
+                extracted_file_neg = each_filename
+
+        data_file = {'pos_path': uuid_path + extracted_file_pos,
+                     'neg_path': uuid_path + extracted_file_neg}
 
         print(data_file)
         print(uuid)
@@ -187,5 +187,5 @@ def render_output():
 
 if __name__ == '__main__':
     app.debug = True
-    app.run(host='0.0.0.0', port=80)
-#     app.run()
+    # app.run(host='0.0.0.0', port=80)
+    app.run()
