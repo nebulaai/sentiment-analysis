@@ -7,9 +7,8 @@ body {
 
 body {
     /* background: #DADADA; */
-    background-image: url("../assets/images/sentiment-background.svg");
     background-size: cover;
-    background-repeat: no-repeat;
+    background: url("../assets/images/sentiment-background.svg") no-repeat;
     color: #2F3238;
     font-size: 16px;
     font-family: 'Titillium Web', sans-serif;

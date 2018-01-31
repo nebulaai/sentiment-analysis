@@ -1,5 +1,4 @@
 
-
 function TaskInfo(contract){
     this.contract = contract;
     this.error = false;
@@ -18,8 +17,6 @@ function TaskInfo(contract){
 
 let my_task_list = [];
 let complete_task_history_address = [];
-
-
 
 
 
@@ -144,138 +141,5 @@ const loadHistoryList = function (){
     loadTask(0);
 };
 
-
-
 get_task_history();
 
-
-
-//let base_url = "";
-// Temporarily unavailable
-// $.each(my_task_list, function (index, value) {
-//     let uuid = web3.toAscii(value.uuid);
-    // if (!isUnicode(uuid)) {
-    //     $.ajax({
-    //         url: "findByUuid?uuid=" + uuid,
-    //         type: "GET",
-    //         error: function (XMLHttpRequest, textStatus, errorThrown) {
-    //             console.log(textStatus);
-    //         },
-    //         success: function (data) {                  //console.log(data);
-    //             if (data) {
-    //                 //let result = JSON.parse(data);
-    //
-    //                 $("ul.histList").append("<li><a href='javascript:showChart(" + index + ")'>" + data.name + "</a></li>");
-    //                 if (index === my_task_list.length - 1) showChart(index);
-    //             }
-    //         }
-    //     });
-
-//     }
-//
-// });
-
-// function showChart(index) {                                                             //console.log(index);
-//
-//     let task = tasks[index];
-//     let output = JSON.parse(task.outputJson); console.log(task);
-//     let dataUri = task.datasetURI;                                                      //console.log(dataUri);
-//     if (!output || !output.forecast) {
-//         alert("data corrupted"); return;
-//     }
-//     if (dataUri && dataUri.indexOf(".csv") > 0)
-//         $.get("http://192.168.88.192:8080/data/usdbtc11261203unix.csv", function (data) { //console.log(data);
-//             let jsonData = csvJSON(data);                       //console.log(jsonData);
-//
-//             let timeInMs = Date.now();                          //console.log(timeInMs);
-//             let interval = 1000 * 60 * 5;                        //console.log(interval);
-//             let forecast = output.forecast.map((x, i) => [timeInMs + interval * i, x]);                        //console.log(forecast);
-//             //let series = jsonData.concat(forecast);
-//             let seriesOptions = [];
-//             seriesOptions[0] = {
-//                 name: task.name,
-//                 data: jsonData
-//             };
-//             seriesOptions[1] = {
-//                 name: task.name + " - forecast",
-//                 data: forecast
-//             };
-//             createChart(seriesOptions);
-//         });
-//     $("#taskName").html(task.name);
-//     $("#script").html(task.script);
-//     //$("#mse").html(output.mse);
-//     //$("#avg_error_rate").html(output.avg_error_rate);
-//
-// }
-// function isUnicode(str) {
-//     for (var i = 0; i < str.length; i++) {
-//         if (str.charCodeAt(i) > 127) return true;
-//     }
-//     return false;
-// }
-// function csvJSON(csv) {
-//
-//     var lines = csv.split("\n"), result = [];
-//     for (var i = 1; i < lines.length; i++) {
-//         var currentline = lines[i].replace(/\r/g, "").split(",").map((x, i) => i == 0 ? parseInt(x) * 1000 : parseInt(x));
-//         result.push(currentline);
-//     }
-//     return result; //JSON
-// }
-// const getParams = query => {
-//     if (!query) {
-//         return {};
-//     }
-//
-//     return (/^[?#]/.test(query) ? query.slice(1) : query)
-//         .split('&')
-//         .reduce((params, param) => {
-//             let [key, value] = param.split('=');
-//             params[key] = value ? decodeURIComponent(value.replace(/\+/g, ' ')) : '';
-//             return params;
-//         }, {});
-// };
-//
-// function createChart(seriesOption) {
-//     let seriesOptions = [];
-//     if (seriesOption.length > 1) seriesOptions = seriesOption;
-//     else seriesOptions.push(seriesOption);
-//     Highcharts.stockChart('chart', {
-//
-//         rangeSelector: {
-//             selected: 4
-//         },
-//
-//         yAxis: {
-//             title: {
-//                 text: 'Price'
-//             },
-//             labels: {
-//                 formatter: function () {
-//                     return (this.value > 0 ? ' + ' : '') + this.value + '%';
-//                 }
-//             },
-//             plotLines: [{
-//                 value: 0,
-//                 width: 2,
-//                 color: 'silver'
-//             }]
-//         },
-//
-//         plotOptions: {
-//             series: {
-//                 compare: 'percent',
-//                 showInNavigator: true
-//             }
-//         },
-//
-//         tooltip: {
-//             pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
-//             valueDecimals: 2,
-//             split: true
-//         },
-//
-//         series: seriesOptions
-//     });
-// }
