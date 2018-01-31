@@ -33,7 +33,7 @@
             <img src="../static/assets/images/Nebula_Logo2.png" alt="Nebula Logo" />
         </div>
         <div class="action">
-            <button type="button" class="btn btn-default" onclick="window.open('../index.html', '_self')">
+            <button type="button" class="btn btn-default" onclick="window.open('/', '_self')">
                 <span>Back to Main</span>
             </button>
         </div>
@@ -97,7 +97,7 @@
                     </tr>
                 </table>
                 <div style="text-align:center;">
-                    <button id="btnChart" class="btn btn-primary" style="background-color: #4a2f8e;" onclick="showTaskResult()">View Chart</button>
+                    <button id="btnChart" class="btn btn-primary" style="background-color: #4a2f8e;" onclick="showTaskResult()">View Result</button>
                 </div>
 
                 <!--<div id="chart"></div>-->
@@ -106,9 +106,9 @@
             <div class="col-xs-12 col-md-6">
                 <div>
                     Input
-                    <input type="text">
+                    <input id="input" type="text">
                 </div>
-                <div>
+                <div id="result">
                     Class
                 </div>
             </div>
