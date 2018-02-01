@@ -5,14 +5,12 @@ body {
     padding: 0;
 }
 
-body {
-    /* background: #DADADA; */
+#bodycontainer {
     background-size: cover;
     background: url("../assets/images/sentiment-background.svg") no-repeat;
     color: #2F3238;
     font-size: 16px;
     font-family: 'Titillium Web', sans-serif;
-    /*line-height: 28px;*/
 }
 
 div.footer {
@@ -27,17 +25,17 @@ div.footer {
 }
 
 div.footer img {
-    height:58px;
+    height: 58px;
 }
 
 a {
-	color: #7F8289;
-	font-size: 16px;
+    color: #7F8289;
+    font-size: 16px;
     /*display: block;	*/
     text-decoration: none;
 }
 
-label{
+label {
     margin-top: 1rem;
 }
 
@@ -47,8 +45,9 @@ a:hover {
 }
 
 a.selected {
-	color: #DE5E60;
+    color: #DE5E60;
 }
+
 a.button {
     font-size: 16px;
     padding: 5px;
@@ -57,7 +56,7 @@ a.button {
     color: #2F3238;
 }
 
-.container-fluid.content{
+.container-fluid.content {
     background-color: white;
     display: flex;
     flex-direction: row;
@@ -69,9 +68,10 @@ a.button {
     z-index: 5;
 }
 
-#status{
+#status {
     max-width: 100%;
 }
+
 .header {
     display: flex;
     width: 100%;
@@ -84,7 +84,7 @@ a.button {
 
 }
 
-.body-container{
+.body-container {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -92,7 +92,7 @@ a.button {
     flex-direction: column;
 }
 
-.content-container{
+.content-container {
     width: 100%;
     display: flex;
     align-items: center;
@@ -103,11 +103,11 @@ a.button {
     height: 100%;
 }
 
-.logo img{
+.logo img {
     width: 25%;
 }
 
-.header .action{
+.header .action {
 }
 
 .content {
@@ -135,7 +135,7 @@ a.button {
 
 .report-content {
     margin: 20px 0;
-    padding: 5px; 
+    padding: 5px;
     height: 60%;
     overflow: scroll;
     width: 90%;
@@ -144,8 +144,7 @@ a.button {
     background-color: #EAEAEA
 }
 
-
-.taskdetail-content  {
+.taskdetail-content {
     margin: 20px 0;
     padding: 5px;
     margin-top: 150px;
@@ -156,8 +155,8 @@ a.button {
     box-shadow: 2px 3px #888888;*/
 }
 
-.report-content::-webkit-scrollbar { 
-    display: none; 
+.report-content::-webkit-scrollbar {
+    display: none;
 }
 
 .input-group-lg {
@@ -170,8 +169,8 @@ a.button {
 
 #chart {
     position: absolute;
-    top:10%;
-    left:10%;
+    top: 10%;
+    left: 10%;
     width: 80%;
     height: 80%;
 }
