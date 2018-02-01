@@ -10,6 +10,7 @@ from flask import Flask, request, redirect, url_for
 from io import BytesIO
 from werkzeug.utils import secure_filename
 from pathlib import Path
+from flask_cors import CORS
 
 
 UPLOAD_FOLDER = 'app/uploads/'
@@ -18,6 +19,7 @@ ALLOWED_EXTENSIONS = set(['zip'])
 
 
 app = Flask(__name__)
+CORS(app)
 # app = Flask(__name__, static_url_path='')
 app.secret_key = "super secret key"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
