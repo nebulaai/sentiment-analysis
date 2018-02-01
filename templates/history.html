@@ -41,7 +41,7 @@
     </div>
     <div class="container-fluid content">
         <div class="row taskdetail-content">
-            <div class="col-xs-12 col-md-3 col-md-offset-1">
+            <div class="col-xs-12 col-md-2">
                 <h2>Task history</h2>
                 <div style="margin-left:25px;">
                     <i id="history-loading" class="fa fa-spinner fa-spin" style="font-size:24px;"></i>
@@ -50,10 +50,10 @@
                 <ul class="histList"></ul>
             </div>
             <div class="col-md-5">
-                <h2>Task Detail (selected)</h2>
+                <h2>Task Detail</h2>
                 <table class="table">
                     <tr>
-                        <td>Task id</td>
+                        <td>Task Id</td>
                         <td id="task_id"></td>
                     </tr>
                     <tr>
@@ -97,23 +97,27 @@
                         <td id="params"></td>
                     </tr>
                 </table>
-                <div style="text-align:center;">
-                    <button id="btnChart" class="btn btn-primary" style="background-color: #4a2f8e;"
-                            onclick="showTaskResult()">View Result
-                    </button>
-                </div>
-
                 <!--<div id="chart"></div>-->
 
             </div>
-            <div class="col-md-5">
+            <div id="prediction" class="col-md-4">
+                <h2>Result</h2>
                 <div>
-                    Input
-                    <input id="input" type="text">
+                    <p>Analyze Sentiment</p>
+                    <p>Enter Text or Sentence <span>(use comma to separate sentences)</span>:</p>
+                </div>
+                <div>
+                    <textarea id="inputText" rows="6" required></textarea>
+                </div>
+                <div style="text-align:center;">
+                    <button id="btnChart" class="btn-lg btn-primary"">Confirm</button>
                 </div>
                 <div id="result">
-                    Class
+                    <img id="pos" class="prediction" src="../static/assets/images/pos.png">
+                    <img id="neg" class="prediction" src="../static/assets/images/neg.png">
+                    <img id="neu" class="prediction" src="../static/assets/images/neutral.png">
                 </div>
+
             </div>
         </div>
         <div class="footer">

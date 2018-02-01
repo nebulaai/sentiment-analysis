@@ -126,8 +126,8 @@ const loadTask = function (index) {
     $("#task_addr").html("<a href='http://18.218.112.136:8000/#/address/"+t.address+"' target='_blank'>"+t.address+"</a>");
     $("#uuid").html(t.uuid);
     $("#task_name").html(t.name);
-    $("#data_addr").html(t.data_address);
-    $("#scpt_addr").html(t.script_address);
+    $("#data_addr").html("<a href="+t.data_address+">"+t.data_address+"</a>");
+    $("#scpt_addr").html("<a href="+t.script_address+">"+t.script_address+"</a>");
     $("#outp_addr").html(t.output_address);
     $("#started").html(t.started);
     $("#completed").html(t.completed);
@@ -149,21 +149,51 @@ const loadHistoryList = function (){
 };
 
 
-
-//get_task_history();
-
-const showTaskResult = function(){
-
-    let uuid = $("#uuid").html();
-    let testString = $("#input").val();
-    data = JSON.stringify({"uuid":uuid,"test_string":testString});
-    $.ajax({
-        url:"http://ec2-18-220-218-90.us-east-2.compute.amazonaws.com/evaluation",
-        method:"POST",
-        data:{data:data},
-        success:function (res) {
-            $("#result").html(res)
+$(document).ready(function () {
+    if($("#inputText").val().length==0){
+        $("#btnChart").attr("disabled", "disabled")
+    }
+    $("#inputText").on('input',function () {
+        let address = $('#inputText').val();
+        if (address.length == 0) {
+            $('#inputText').next('div').remove();
+            $('#inputText').after('<div style="color: red">Input is Required</div>');
+            $("#btnChart").attr("disabled", "disabled")
+        } else {
+            $('#inputText').next('div').remove();
+            $("#btnChart").removeAttr("disabled")
         }
+    });
+
+    const showTaskResult = function () {
+
+        let uuid = $("#uuid").html();
+        let testString = $("#inputText").val();
+        data = JSON.stringify({"uuid": uuid, "test_string": testString});
+            $.ajax({
+                url: "http://ec2-18-220-218-90.us-east-2.compute.amazonaws.com/evaluation",
+                method: "POST",
+                data: {data: data},
+                success: function (res) {
+                    $(".prediction").hide();
+                    switch (res) {
+                        case "neutral":
+                            $("#neu").show();
+                            break;
+                        case "neg":
+                            $("#neg").show();
+                            break;
+                        case "pos":
+                            $("#pos").show();
+                    }
+                }
+            })
+    };
+
+    $("#btnChart").click(function () {
+        showTaskResult();
     })
 
-};
+})
+//get_task_history();
+
