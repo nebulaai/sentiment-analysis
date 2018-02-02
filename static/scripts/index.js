@@ -95,8 +95,8 @@ $(document).ready(function () {
     $('.data-form').on('submit', function (e) {
         e.preventDefault();
         submitOrder(function () {
-            $("#payment").show();
-            $("#create_task_btn").hide();
+            $("#payment").css("visibility","visible");
+            $("#create_task_btn").css("visibility","hidden");
         });
     });
 });
@@ -139,7 +139,7 @@ const waitingForTaskDispatch = function () {
 
             if (web3.toDecimal(result) !== 0) {
                 console.log("Worker address : " + result);
-                $("#taskDispatched").show();
+                $("#taskDispatched").css("visibility","visible");
                 waitingForTaskStart();
             }
             else {
@@ -161,7 +161,7 @@ const waitingForTaskStart = function () {
         } else {
             if (result) {
                 console.log("Task has been started");
-                $('#taskStarted').show();
+                $('#taskStarted').css("visibility","visible");
                 waitingForTaskCompletion();
             } else {
                 setTimeout(function () {
@@ -195,7 +195,7 @@ const waitingForTaskCompletion = function () {
         } else {
             if (result) {
                 showResult();
-                $('#taskCompleted').show();
+                $('#taskCompleted').css("visibility","visible");
                 $('#report-loading').hide();
                 $('#view-report-btn').show();
             } else {

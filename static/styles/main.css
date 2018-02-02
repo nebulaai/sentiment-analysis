@@ -88,7 +88,19 @@ a.button {
     margin-bottom: 2%;
 
 }
-
+.index{
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: start;
+    margin: 0;
+    width: 94%;
+    padding-top: 3%;
+    padding-bottom: 1%;
+    margin-bottom: 3%;
+    z-index: 5;
+}
 .body-container {
     display: flex;
     justify-content: center;
@@ -121,6 +133,12 @@ a.button {
     /* display: flex;
     flex-direction: row; */
 
+}
+
+#index-content{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .content .editor {
@@ -159,9 +177,8 @@ a.button {
 .report-content {
     margin: 20px 0;
     padding: 5px;
-    height: 60%;
-    overflow: scroll;
-    width: 90%;
+    /*height: 60%;*/
+    /*overflow: scroll;*/
     border: 1px solid #2c2c2c;
     box-shadow: 2px 3px #888888;
     background-color: #EAEAEA
