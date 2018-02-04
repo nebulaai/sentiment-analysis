@@ -169,6 +169,10 @@ $(document).ready(function () {
 
         let uuid = $("#uuid").html();
         let testString = $("#inputText").val();
+        if (uuid.length==0){
+            alert("Please select a task")
+            return;
+        }
         data = JSON.stringify({"uuid": uuid, "test_string": testString});
             $.ajax({
                 url: "http://ec2-18-220-218-90.us-east-2.compute.amazonaws.com/evaluation",
