@@ -181,7 +181,7 @@ const showResult = function (fee, hash) {
     console.log(localStorage.completed);
     console.log(localStorage.uuid);
     console.log(localStorage.task_address);
-    window.open("output.html"); //, "_self"
+    window.open("history"); //, "_self"
 };
 
 const waitingForTaskCompletion = function () {
