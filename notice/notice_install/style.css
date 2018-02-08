@@ -1,0 +1,198 @@
+body, html {
+    min-height: 100%;
+    min-width: 100%;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+    
+}
+
+body {
+    background-image: url("metamaskbackground.png");
+    height: 100%; 
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.linehere {
+    display: none;        
+}
+
+.content {
+    text-align: center;
+
+}
+
+#contactUs {
+    line-height: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: 500;
+    word-wrap: normal;
+    top: 10px;
+    font-size: 1vw;   
+    color: rgb(73, 73, 73); 
+}
+
+a.faqs {
+    text-decoration: none;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 21px;
+    position: absolute;
+    right: 4vw;
+    top: 5vh;
+    color: rgb(81, 81, 79);
+}
+
+img.browser {
+    width: 5rem;    
+    padding-top: 50px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.pointerDownload:hover {
+    cursor: pointer;
+}
+
+#clickhere {
+    margin-top: 0.4vw;
+    line-height: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: 300;
+    font-size: 0.8vw;   
+    color:#8B8C8E; 
+    cursor: hand;
+}
+
+img.logo {
+    margin-top: 10%;
+    width: 8rem;
+}
+
+.yourMetamask {
+    line-height: 0;
+    font-family: "Helvetica", Helvetica, Arial, sans-serif;
+    font-size: 4vw;   
+    color: rgb(95, 95, 95);
+    font-weight: 100;
+}
+
+.simpleInstall {
+    line-height: 1vh;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-size: 2vw;
+    color: rgb(73, 73, 73); 
+    font-weight: 100; 
+}
+
+.contactUs {
+    line-height: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: 500;
+    font-size: 1vw;   
+    color: rgb(73, 73, 73); 
+}
+
+.startDownload {
+    line-height: 1vh;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: 100;
+    font-size: 3vw;
+    color: rgb(73, 73, 73);  
+}
+
+.copyright {
+    text-decoration: none;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.8vw;
+    position: absolute;
+    right: 4vw;
+    bottom: 1vh;
+    color: rgb(72, 74, 73);  
+}
+
+@media only screen and (max-width: 768px) {
+    #startDownload {
+        display: none;
+    }
+    #metamask {
+        display: none;        
+    }
+
+    #clickhere {
+        display: none;
+    }
+
+    .linehere {
+        display:block;
+    }
+    .yourMetamask {
+        line-height: 0;
+        font-family: "Helvetica", Helvetica, Arial, sans-serif;
+        font-size: 7.5vw;   
+        color: rgb(95, 95, 95);
+    }
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        background-image: url("mobilebackground.png");
+        background-position: center;
+    }
+    a.faqs {
+        text-decoration: none;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 21px;
+        position: absolute;
+        left: 310px;
+        top: 10px;
+        color: rgb(81, 81, 79);
+    }
+    img.logo {
+        margin-top: 25vh;
+        width: 4rem;
+    }
+
+    .contactUs {
+        text-align: center;
+        line-height: 0;
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+        font-weight: 100;
+        word-wrap: break-word;
+        top: 10px;
+        font-size: 4vw;   
+        color: rgb(73, 73, 73); 
+    }
+
+    a#contactUs {
+        text-align: center;
+        line-height: 0;
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+        font-weight: 500;
+        word-wrap: break-word;
+        top: 10px;
+        font-size: 4vw;  
+        color: rgb(73, 73, 73); 
+    }    
+    .copyright {
+        text-decoration: none;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 2vw;
+        position: absolute;
+        right: 10vw;
+        bottom: 0px;
+        color: black;
+    }
+    .simpleInstall {
+        margin: 7.5vw;
+        line-height: 4vh;
+        font-weight: 300;
+        letter-spacing: 0vw;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 4.5vw;
+        color: rgb(73, 73, 73);  
+    }
+}
